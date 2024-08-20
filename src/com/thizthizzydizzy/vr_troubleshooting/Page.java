@@ -5,15 +5,22 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 public class Page{
     private final String name;
-    private final String title;
+    private String title;
     private ArrayList<String> paragraphs = new ArrayList<>();
     private ArrayList<Link> links = new ArrayList<>();
     private ArrayList<Page> pages = new ArrayList<>();
+    private ArrayList<Page> problems = new ArrayList<>();
+    private Page parent;
+    private int actions;
     public Page(String name, String title){
-        this.name = name;
+        this(name);
         this.title = title;
     }
+    public Page(String name){
+        this.name = name;
+    }
     public void generate(File folder) throws IOException{
+        if(title==null&&parent!=null)title = parent.title;
         File file = new File(folder, "index.html");
         if(!folder.exists())folder.mkdirs();
         int depth = file.getAbsolutePath().split("[\\/\\\\]").length-Main.root.getAbsolutePath().split("[\\/\\\\]").length;
@@ -34,7 +41,7 @@ public class Page{
             +"                Back\n"
             +"            </div>\n"
             +"        </a>\n"
-            +"        <h1 id=\"head\">VR Troubleshooting</h1>\n"
+            +"        <h1 id=\"head\">VR Troubleshooting (WIP)</h1>\n"
             +"        <h2 id='title'>"+title+"</h2>\n"
             +"        <div>\n"
             +(paragraphs.isEmpty()?"":"            <p>"+String.join("</p>\n            <p>", paragraphs))+"</p>\n"
@@ -73,8 +80,15 @@ public class Page{
         paragraphs.add(text);
         return this;
     }
+    public Page action(String title, String text){
+        actions++;
+        paragraphs.add("<strong>"+title+"</strong>");
+        paragraphs.add(text);
+        return this;
+    }
     public Page subpage(String title, String caption, Page page){
-        links.add(new Link("./"+page.name+"/", title, caption));
+        page.parent = this;
+        links.add(new Link("./"+page.name+"/", title, caption, page));
         pages.add(page);
         return this;
     }
@@ -82,5 +96,25 @@ public class Page{
         ArrayList<String> strs = new ArrayList<>();
         for(Link link : links)strs.add(link.toString());
         return strs;
+    }
+    public Page problem(String name, String caption, Page page){
+        if(problems.isEmpty()){
+            paragraph("What issue are you having?");
+        }
+        problems.add(page);
+        return subpage(name, caption, page);
+    }
+    public int countProblems(){
+        int total = problems.size();
+        for(var page : pages)total += page.countProblems();
+        return total;
+    }
+    public int countActions(){
+        int total = actions;
+        for(var page : pages)total += page.countActions();
+        return total;
+    }
+    public boolean isInIssue(){
+        return parent!=null&&(parent.problems.contains(this)||parent.isInIssue());
     }
 }
