@@ -3,15 +3,18 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Locale;
 public class Page{
     private final String name;
     private String title;
     private ArrayList<String> paragraphs = new ArrayList<>();
+    private ArrayList<String> suffixParagraphs = new ArrayList<>();
     private ArrayList<Link> links = new ArrayList<>();
     private ArrayList<Page> pages = new ArrayList<>();
     private ArrayList<Page> problems = new ArrayList<>();
     private Page parent;
     private int actions;
+    private int resources;
     public Page(String name, String title){
         this(name);
         this.title = title;
@@ -44,8 +47,9 @@ public class Page{
             +"        <h1 id=\"head\">VR Troubleshooting (WIP)</h1>\n"
             +"        <h2 id='title'>"+title+"</h2>\n"
             +"        <div>\n"
-            +(paragraphs.isEmpty()?"":"            <p>"+String.join("</p>\n            <p>", paragraphs))+"</p>\n"
-            +(links.isEmpty()?"":"            <p>"+String.join("</p>\n            <p>", genLinks(links)))+"</p>\n"
+            +(paragraphs.isEmpty()?"":"            <p>"+String.join("</p>\n            <p>", paragraphs)+"</p>\n")
+            +(links.isEmpty()?"":"            <p>"+String.join("</p>\n            <p>", genLinks(links))+"</p>\n")
+            +(suffixParagraphs.isEmpty()?"":"            <p>"+String.join("</p>\n            <p>", suffixParagraphs)+"</p>\n")
             +"        </div>\n"
             +"        <footer>\n"
             +"            <div class='links'>\n"
@@ -77,8 +81,22 @@ public class Page{
         }
     }
     public Page paragraph(String text){
-        paragraphs.add(text);
+        return paragraph(text, false);
+    }
+    public Page paragraph(String text, boolean suffix){
+        if(suffix)suffixParagraphs.add(text);
+        else
+            paragraphs.add(text);
         return this;
+    }
+    public Page seeAlso(String linkText, String linkDestination){
+        String prefix = "";
+        if(linkText.toLowerCase(Locale.ROOT).startsWith("the ")){
+            prefix += linkText.substring(0, 4);
+            linkText = linkText.substring(4);
+        }
+        resources++;
+        return paragraph("For more troubleshooting support, see "+prefix+"<a href=\""+linkDestination+"\">"+linkText+"</a>", true);
     }
     public Page action(String title, String text){
         actions++;
@@ -112,6 +130,11 @@ public class Page{
     public int countActions(){
         int total = actions;
         for(var page : pages)total += page.countActions();
+        return total;
+    }
+    public int countResources(){
+        int total = resources;
+        for(var page : pages)total += page.countResources();
         return total;
     }
     public boolean isInIssue(){

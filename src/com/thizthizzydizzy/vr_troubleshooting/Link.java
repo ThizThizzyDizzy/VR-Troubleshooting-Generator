@@ -14,7 +14,10 @@ public class Link{
     public String toString(){
         int problems = page.countProblems();
         int actions = page.countActions();
+        int resources = page.countResources();
         boolean isInIssue = page.isInIssue();
-        return "<a href=\""+link+"\">"+title+"</a>"+(caption!=null?" "+caption:"")+"<br><span style='font-size: 0.5em'>"+(!isInIssue||problems>0?problems+" known issue"+(problems==1?"":"s")+", ":"")+actions+" potential solution"+(actions==1?"":"s")+"</span>";
+        String issuesStr = !isInIssue||problems>0?problems+" known issue"+(problems==1?"":"s")+", ":"";
+        String resourcesStr = resources>0?", "+resources+" external resource"+(resources==1?"":"s"):"";
+        return "<a href=\""+link+"\">"+title+"</a>"+(caption!=null?" "+caption:"")+"<br><span style='font-size: 0.5em'>"+issuesStr+actions+" potential solution"+(actions==1?"":"s")+resourcesStr+"</span>";
     }
 }
