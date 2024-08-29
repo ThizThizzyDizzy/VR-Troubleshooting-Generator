@@ -104,7 +104,6 @@ public class Page{
             prefix += linkText.substring(0, 4);
             linkText = linkText.substring(4);
         }
-        resources++;
         return paragraph("Source: "+prefix+"<a href=\""+linkDestination+"\">"+linkText+"</a>", true);
     }
     public Page action(String title, String text){
@@ -153,6 +152,7 @@ public class Page{
         return problem(error, null, new Page(error, "Pimax Error "+error)
             .paragraph(cause)
             .action("Solution", solution)
+            .source("Pimax", "https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517")
         );
     }
 }
