@@ -98,6 +98,15 @@ public class Page{
         resources++;
         return paragraph("For more troubleshooting support, see "+prefix+"<a href=\""+linkDestination+"\">"+linkText+"</a>", true);
     }
+    public Page source(String linkText, String linkDestination){
+        String prefix = "";
+        if(linkText.toLowerCase(Locale.ROOT).startsWith("the ")){
+            prefix += linkText.substring(0, 4);
+            linkText = linkText.substring(4);
+        }
+        resources++;
+        return paragraph("Source: "+prefix+"<a href=\""+linkDestination+"\">"+linkText+"</a>", true);
+    }
     public Page action(String title, String text){
         actions++;
         paragraphs.add("<strong>"+title+"</strong>");
@@ -139,5 +148,11 @@ public class Page{
     }
     public boolean isInIssue(){
         return parent!=null&&(parent.problems.contains(this)||parent.isInIssue());
+    }
+    public Page pimaxError(String error, String cause, String solution){
+        return problem(error, null, new Page(error, "Pimax Error "+error)
+            .paragraph(cause)
+            .action("Solution", solution)
+        );
     }
 }
