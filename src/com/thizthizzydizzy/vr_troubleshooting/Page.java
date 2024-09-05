@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.function.Consumer;
 public class Page{
     private final String name;
     private String title;
@@ -104,7 +105,7 @@ public class Page{
             prefix += linkText.substring(0, 4);
             linkText = linkText.substring(4);
         }
-        return paragraph("Source: "+prefix+"<a href=\""+linkDestination+"\">"+linkText+"</a>", true);
+        return paragraph("Source: "+prefix+"<a href=\""+linkDestination+"\">"+linkText+"</a>");
     }
     public Page action(String title, String text){
         actions++;
@@ -149,10 +150,14 @@ public class Page{
         return parent!=null&&(parent.problems.contains(this)||parent.isInIssue());
     }
     public Page pimaxError(String error, String cause, String solution){
-        return problem(error, null, new Page(error, "Pimax Error "+error)
+        return pimaxError(error, cause, solution, null);
+    }
+    public Page pimaxError(String error, String cause, String solution, Consumer<Page> subpageStuff){
+        var subpage = new Page(error, "Pimax Error "+error)
             .paragraph(cause)
             .action("Solution", solution)
-            .source("Pimax", "https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517")
-        );
+            .source("Pimax", "https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517");
+        if(subpageStuff!=null)subpageStuff.accept(subpage);
+        return problem(error, null, subpage);
     }
 }

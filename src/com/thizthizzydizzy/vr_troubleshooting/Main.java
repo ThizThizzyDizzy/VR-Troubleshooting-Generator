@@ -2,7 +2,7 @@ package com.thizthizzydizzy.vr_troubleshooting;
 import java.io.File;
 import java.io.IOException;
 public class Main{
-    public static File root = new File(new File("src").getAbsoluteFile().getParentFile().getParentFile(), "ThizThizzyDizzy.github.io\\vr-troubleshooting");
+    public static File root = new File(new File("src").getAbsoluteFile().getParentFile().getParentFile(), "ThizThizzyDizzy.github.io"+File.separatorChar+"vr-troubleshooting");
     public static void main(String[] args) throws IOException{
         new Page("index", "Troubleshooting Home")
             .paragraph("Welcome to my VR Troubleshooting page! Please pick the type of device you are having issues with:")
@@ -34,14 +34,14 @@ public class Main{
                         .pimaxError("10500", "Connected the headset to the computer, but the USB is not recognized.", "Try reconnect the USB first. If the issue persists, consider uninstalling the USB drivers and reinstalling them by downloading the latest version from the motherboard manufacturer's website")
                         .pimaxError("10517", "Failed to retrieve device information via USB", "Restart the headset, and reboot the computer")
                         .pimaxError("10518", "Headset positioning information is abnormal", "Contact after-sales")
-                        .pimaxError("10600", "The graphics card's DisplayPort is not being detected.", "Reconnect the DP cable and reinstall the graphics card driver (for AMD cards, it is recommended to uninstall and reinstall).<br>" +
-                            "Try using another DP port on the dedicated graphics card, then reboot the operating system.<br>" +
-                            "The issue might be with the DP cable; consider replacing it.<br>" +
-                            "The Crystal Light firmware update may have failed; attempt to update the firmware again")
+                        .pimaxError("10600", "The graphics card's DisplayPort is not being detected.", "Reconnect the DP cable and reinstall the graphics card driver (for AMD cards, it is recommended to uninstall and reinstall).<br>"
+                            +"Try using another DP port on the dedicated graphics card, then reboot the operating system.<br>"
+                            +"The issue might be with the DP cable; consider replacing it.<br>"
+                            +"The Crystal Light firmware update may have failed; attempt to update the firmware again")
                         .pimaxError("10632-10636", "Graphics card or DP cable problem", "Reconnect the display cable<br>Install the graphics card driver<br>Restart the operating system")
-                        .pimaxError("10900", "The headset is connected to the integrated graphics card interface. The graphics card is too old to support direct mode. Also could be graphics card driver is also outdated, lacking support for direct mode.", "Connect the headset to the dedicated graphics card<br>" +
-                            "Update or downgrade the graphics card driver to different version<br>" +
-                            "Check the graphics card model and ensure it meets the minimum requirements")
+                        .pimaxError("10900", "The headset is connected to the integrated graphics card interface. The graphics card is too old to support direct mode. Also could be graphics card driver is also outdated, lacking support for direct mode.", "Connect the headset to the dedicated graphics card<br>"
+                            +"Update or downgrade the graphics card driver to different version<br>"
+                            +"Check the graphics card model and ensure it meets the minimum requirements")
                         .pimaxError("10932", "Graphics card or DP cable problem", "Reconnect the display cable<br>Install the graphics card driver<br>Restart the operating system")
                         .pimaxError("10933", "The device is currently in use", "Reconnect the DP cable<br>Switch to another available DP port on the dedicated graphics card, or restart the computer")
                         .pimaxError("10936", "Unable to initialize the headset screen", "Reconnect the DP cable or restart the computer<br>Replace the data cable or switch to another available DP port on the dedicated graphics card")
