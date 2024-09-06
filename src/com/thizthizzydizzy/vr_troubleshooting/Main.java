@@ -32,8 +32,12 @@ public class Main{
                     .paragraph("Which device are you having trouble with?")
                     .subpage("I have an error code", "(from pimax play)", new Page("error-codes", "Pimax Error Codes")
                         .pimaxError("10500", "Connected the headset to the computer, but the USB is not recognized.", "Try reconnect the USB first. If the issue persists, consider uninstalling the USB drivers and reinstalling them by downloading the latest version from the motherboard manufacturer's website")
-                        .pimaxError("10517", "Failed to retrieve device information via USB", "Restart the headset, and reboot the computer")
-                        .pimaxError("10518", "Headset positioning information is abnormal", "Contact after-sales")
+                        .pimaxError("10517", "Failed to retrieve device information via USB", "Restart the headset, and reboot the computer", (page)->{
+                            page.paragraph("This may also appear briefly while the headset is connecting.");
+                        })
+                        .pimaxError("10518", "Headset positioning information is abnormal", "Contact after-sales", (page) -> {
+                            page.paragraph("This may also appear briefly while the headset is connecting.");
+                        })
                         .pimaxError("10600", "The graphics card's DisplayPort is not being detected.", "Reconnect the DP cable and reinstall the graphics card driver (for AMD cards, it is recommended to uninstall and reinstall).<br>"
                             +"Try using another DP port on the dedicated graphics card, then reboot the operating system.<br>"
                             +"The issue might be with the DP cable; consider replacing it.<br>"
@@ -48,16 +52,22 @@ public class Main{
                         .pimaxError("10938", "Exceeding the graphics card's bandwidth", "Remove the excess display devices.<br>Check if there is a high-refresh-rate monitor using a DP cable, and switch to an HDMI connection.")
                         .pimaxError("20000", "Connecting the headset to the computer, the USB is not recognized", "Reconnect the DP cable<br>May attempt to resolve the USB driver issue by uninstalling t he current driver and downloading the appropriate driver from the motherboard's official website")
                         .pimaxError("20100", "PimaxPlay file installation error", "Reinstall the Pimax Play client")
-                        .pimaxError("20400", "Failed to acquire the headset device", "Restart the Pimax Play client, reinstall the Pimax Play client")
+                        .pimaxError("20400", "Failed to acquire the headset device", "Restart the Pimax Play client, reinstall the Pimax Play client", (page) -> {
+                            page.action("Update pimax play", "This error can be caused by using a version of pimax play that is too old. Update to the latest version from the <a href=\"https://pimax.com/pages/downloads-manuals\">Pimax website</a>");
+                        })
                         .pimaxError("20800", "The connection to the VR service failed", "Restart the Pimax service")
                         .pimaxError("29001", "There is an abnormality in the internal data communication of Pimax Play", "Restart the Pimax service")
                         .pimaxError("30000", "The Pimax Play service is experiencing an anomaly", "Restart the Pimax Play client, reinstall the PimaxPlay client")
+                        .pimaxError("30101", "Unknown", null, (page)->{
+                            page.paragraph("This may appear briefly while the headset is connecting.");
+                            page.action("Diagnose Connection Problems", "See <a href=\"../../crystal/connection/\">Connection Problems</a>");
+                        })
                         .pimaxError("30202-30204", "Pimax Play and headset communication is malfunctioning", "Please wait. If the waiting time is too long, please restart the headset and the Pimax service.")
                         .pimaxError("30205", "Pimax Play has timed out while communicating with the headset", "Restart the computer or reinstall the Pimax Play client")
                         .source("Pimax", "https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517")
                     )
-                    .subpage("Pimax Crystal", null, new Page("crystal", "Pimax Crystal")
-                        .problem("Connection problems", null, new Page("connection", "Pimax Crystal - Connection Problems")
+                    .subpage("Pimax Crystal or Crystal Light", null, new Page("crystal", "Pimax Crystal/Light")
+                        .problem("Connection problems", null, new Page("connection", "Pimax Crystal/Light - Connection Problems")
                             .paragraph("What are the USB and HDMI/DP states? (As reported by VR Manager or Pimax Play)")
                             .subpage("Both not connected", "(usb: no-connect, hdmi: no-connect)", new Page("no-connect")
                                 .paragraph("What color is the main headset light? (The one by the power button, not by the battery)")
@@ -70,13 +80,16 @@ public class Main{
                                     .action("Replace the headset battery", "Remove the battery, wait 10 seconds, and replace the battery. Wait up to 2 minutes for the headset to start up and reconnect.")
                                 )
                             )
-                            .subpage("Both connected", "(usb: success, hdmi: success)", new Page("success")
+                            .subpage("Both connected", "(usb: success, hdmi: success)<br>In Pimax Play, this will appear stuck as <strong>Connecting</strong>", new Page("success")
                                 .action("Restart the Pimax Service", "Press \"Restart Service\" in pimax play. (VR Manager will do this for you automatically)")
                                 .action("Manually restart the headset", "Hold the power button until both the main headset light and the battery light turn off, and wait up to 2 minutes for the headset to restart and reconnect.")
+                                .action("Ensure only one pimax device is connected", "If you for some reason have two pimax headsets plugged in via USB, unplug one of them")
+                            )
+                            .subpage("Unstable", "(constantly changing between success, failed, and no_connect)<br>In pimax play, this will show as constantly connecting and disconnecting, eventually settling as <strong>Service not connected</strong>", new Page("unstable")
+                                .action("Reboot your PC", null)
                             )
                         )
                     )
-                    .subpage("Pimax Crystal Light", null, new Page("crystal-light", "Pimax Crystal Light"))
                     .subpage("Pimax Crystal Controllers", "(the inside-out tracked controllers for the Crystal and Crystal Light)", new Page("crystal-controllers", "Pimax Crystal Controllers"))
                 )
                 .subpage("Valve", null, new Page("valve", "Valve Headset/Controllers")

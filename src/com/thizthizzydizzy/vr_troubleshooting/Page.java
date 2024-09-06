@@ -110,7 +110,7 @@ public class Page{
     public Page action(String title, String text){
         actions++;
         paragraphs.add("<strong>"+title+"</strong>");
-        paragraphs.add(text);
+        if(text!=null)paragraphs.add(text);
         return this;
     }
     public Page subpage(String title, String caption, Page page){
@@ -154,9 +154,9 @@ public class Page{
     }
     public Page pimaxError(String error, String cause, String solution, Consumer<Page> subpageStuff){
         var subpage = new Page(error, "Pimax Error "+error)
-            .paragraph(cause)
-            .action("Solution", solution)
-            .source("Pimax", "https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517");
+            .paragraph(cause==null?"Unknown":cause);
+        if(solution!=null)subpage.action("Solution", solution);
+        if(cause!=null&&solution!=null)subpage.source("Pimax", "https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517");
         if(subpageStuff!=null)subpageStuff.accept(subpage);
         return problem(error, null, subpage);
     }
