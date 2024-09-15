@@ -94,7 +94,7 @@ public class Main{
                     )
                     .subpage("Pimax Crystal Controllers", "(the inside-out tracked controllers for the Crystal and Crystal Light)", new Page("crystal-controllers", "Pimax Crystal Controllers")
                         .problem("The controllers won't reliably detect my hands touching the buttons", "(Flickering hand gestures in VRChat, etc.)", new Page("touch_sensors", "Pimax Crystal Controllers - Touch Sensors")
-                            .paragraph("I am not aware of a solution to this; I would switching to lighthouse tracking & knuckles (valve index controllers) if possible.")
+                            .paragraph("I am not aware of a solution to this; I would recommend switching to lighthouse tracking & knuckles (valve index controllers) if possible.")
                         )
                     )
                     .problem("My controllers/vive trackers keep turning off", "(When using pimax play or any pimax headset))", new Page("standby", "Pimax - Standby Mode")
