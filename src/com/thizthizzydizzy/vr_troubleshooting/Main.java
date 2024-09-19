@@ -47,7 +47,9 @@ public class Main{
                             +"Update or downgrade the graphics card driver to different version<br>"
                             +"Check the graphics card model and ensure it meets the minimum requirements")
                         .pimaxError("10932", "Graphics card or DP cable problem", "Reconnect the display cable<br>Install the graphics card driver<br>Restart the operating system")
-                        .pimaxError("10933", "The device is currently in use", "Reconnect the DP cable<br>Switch to another available DP port on the dedicated graphics card, or restart the computer")
+                        .pimaxError("10933", "The device is currently in use", "Reconnect the DP cable<br>Switch to another available DP port on the dedicated graphics card, or restart the computer", (page) -> {
+                            page.action("Update Graphics Drivers", "This error can be caused by outdated graphics drivers.");
+                        })
                         .pimaxError("10936", "Unable to initialize the headset screen", "Reconnect the DP cable or restart the computer<br>Replace the data cable or switch to another available DP port on the dedicated graphics card")
                         .pimaxError("10938", "Exceeding the graphics card's bandwidth", "Remove the excess display devices.<br>Check if there is a high-refresh-rate monitor using a DP cable, and switch to an HDMI connection.")
                         .pimaxError("20000", "Connecting the headset to the computer, the USB is not recognized", "Reconnect the DP cable<br>May attempt to resolve the USB driver issue by uninstalling t he current driver and downloading the appropriate driver from the motherboard's official website")
