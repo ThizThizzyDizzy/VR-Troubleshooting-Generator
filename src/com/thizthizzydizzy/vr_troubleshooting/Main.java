@@ -112,7 +112,7 @@ public class Main{
                         )
                     )
                     .problem("My controllers/vive trackers keep turning off", "(When using pimax play or any pimax headset))", new Page("standby", "Pimax - Standby Mode")
-                        .paragraph("Pimax has a standby mode that activates after a period of time where the headset is not moving. This is 3 minutes by default. When this triggers, all controllers and trackers will power off. (This may do other things as well, but I have not confirmed anything else.)")
+                        .paragraph("Pimax has a standby mode that activates after a period of time where the headset is not moving. This is 3 minutes by default. When this triggers, all controllers and trackers will power off. This seems to also cause a the headset to reduce to an extremely low refresh rate (5fps or less) until it moves significantly, which wakes it up out of standby mode.")
                         .action("Disable the pimax standby timer", "Open the JSON file located at %LOCALAPPDATA%\\Pimax\\runtime\\profile.json, and change the setting for standby_timeout_min to 0. This setting is the number of minutes until standby mode is activated. 0 will disable this altogether.")
                     )
                 )
