@@ -45,7 +45,7 @@ public class Page{
             +"                Back\n"
             +"            </div>\n"
             +"        </a>\n"
-            +"        <h1 id=\"head\">VR Troubleshooting (WIP)</h1>\n"
+            +"        <h1 id=\"head\">VR Troubleshooting</h1>\n"
             +"        <h2 id='title'>"+title+"</h2>\n"
             +"        <div>\n"
             +(paragraphs.isEmpty()?"":"            <p>"+String.join("</p>\n            <p>", paragraphs)+"</p>\n")
@@ -121,7 +121,7 @@ public class Page{
     }
     private ArrayList<String> genLinks(ArrayList<Link> links){
         ArrayList<String> strs = new ArrayList<>();
-        for(Link link : links)strs.add(link.toString());
+        for(Link link : links)if(link.isValid())strs.add(link.toString());
         return strs;
     }
     public Page problem(String name, String caption, Page page){

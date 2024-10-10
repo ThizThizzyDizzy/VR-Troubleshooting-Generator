@@ -20,4 +20,11 @@ public class Link{
         String resourcesStr = resources>0?", "+resources+" external resource"+(resources==1?"":"s"):"";
         return "<a href=\""+link+"\">"+title+"</a>"+(caption!=null?" "+caption:"")+"<br><span style='font-size: 0.5em'>"+issuesStr+actions+" potential solution"+(actions==1?"":"s")+resourcesStr+"</span>";
     }
+    public boolean isValid(){
+        int problems = page.countProblems();
+        int actions = page.countActions();
+        int resources = page.countResources();
+        boolean isInIssue = page.isInIssue();
+        return isInIssue||problems+actions+resources>0;
+    }
 }
