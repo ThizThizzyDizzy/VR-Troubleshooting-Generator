@@ -57,6 +57,7 @@ public class Main{
                         .pimaxError("20400", "Failed to acquire the headset device", "Restart the Pimax Play client, reinstall the Pimax Play client", (page) -> {
                             page.action("Update pimax play", "This error can be caused by using a version of pimax play that is too old. Update to the latest version from the <a href=\"https://pimax.com/pages/downloads-manuals\">Pimax website</a>");
                         })
+                        .pimaxError("20700", "Failed to start VR Service", "Restart the client, reinstall the client")
                         .pimaxError("20800", "The connection to the VR service failed", "Restart the Pimax service")
                         .pimaxError("29001", "There is an abnormality in the internal data communication of Pimax Play", "Restart the Pimax service")
                         .pimaxError("30000", "The Pimax Play service is experiencing an anomaly", "Restart the Pimax Play client, reinstall the PimaxPlay client")
