@@ -109,7 +109,7 @@ public class Main{
                         )
                     )
                     .subpage("Pimax Crystal Controllers", "(the inside-out tracked controllers for the Crystal and Crystal Light)", new Page("crystal-controllers", "Pimax Crystal Controllers")
-                        .problem("The controllers won't enter pairing mode", new Page("pairing-mode", "Pimax Crystal Controllers - Pairing Mode")
+                        .problem("The controllers won't enter pairing mode", null, new Page("pairing-mode", "Pimax Crystal Controllers - Pairing Mode")
                             .action("Press & hold both face buttons", "Pimax Play tells you to hold a face button and menu button, which is incorrect. Hold A and B or X and Y to enter pairing mode.")
                         )
                         .problem("The controllers won't reliably detect my hands touching the buttons", "(Flickering hand gestures in VRChat, etc.)", new Page("touch_sensors", "Pimax Crystal Controllers - Touch Sensors")
