@@ -51,7 +51,9 @@ public class Main{
                             page.action("Update Graphics Drivers", "This error can be caused by outdated graphics drivers.");
                         })
                         .pimaxError("10936", "Unable to initialize the headset screen", "Reconnect the DP cable or restart the computer<br>Replace the data cable or switch to another available DP port on the dedicated graphics card")
-                        .pimaxError("10938", "Exceeding the graphics card's bandwidth", "Remove the excess display devices.<br>Check if there is a high-refresh-rate monitor using a DP cable, and switch to an HDMI connection.")
+                        .pimaxError("10938", "Exceeding the graphics card's bandwidth", "Remove the excess display devices.<br>Check if there is a high-refresh-rate monitor using a DP cable, and switch to an HDMI connection.", (page)->{
+                            page.action("Disable HAGS", "Disable HAGS (Hardware Accelerated GPU Scheduling) in windows settings");
+                        })
                         .pimaxError("20000", "Connecting the headset to the computer, the USB is not recognized", "Reconnect the DP cable<br>May attempt to resolve the USB driver issue by uninstalling t he current driver and downloading the appropriate driver from the motherboard's official website")
                         .pimaxError("20100", "PimaxPlay file installation error", "Reinstall the Pimax Play client")
                         .pimaxError("20400", "Failed to acquire the headset device", "Restart the Pimax Play client, reinstall the Pimax Play client", (page) -> {
