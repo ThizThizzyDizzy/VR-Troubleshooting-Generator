@@ -191,6 +191,21 @@ public class Main{
                     .subpage("Leap Motion Controller 2", null, new Page("leap-motion-2", "Leap Motion Controller 2"))
                 )
             )
+            .subpage("Locomotion Systems", "(Treadmills, VR Shoes, etc.", new Page("locomotion-systems", "VR Locomotion Systems")
+                .paragraph("What type of locomotion system are you having trouble with?")
+                .subpage("Omnidirectional Treadmill/Slidemill", null, new Page("treadmill", "Omnidirectional Treadmill/Slidemill")
+                    .paragraph("What device are you having trouble with?")
+                    .subpage("Kat Walk C2+", null, new Page("kat-walk-c2-plus", "Kat Walk C2+")
+                        .problem("Harness falls down", "(It should normally stay where you leave it)", new Page("harness-falling", "Harness falls down")
+                            .action("Hook the harness cable back on its pulley.", "Remove the back panel. There's a pulley near the top underneath the back panel. The harness cable may have slipped off; If you can, try hooking the cable back onto the pulley. (This is quite difficult to reach)")
+                        )
+                        .problem("Reciever won't connect to PC", "(USB Device not recognized)", new Page("usb-not-recognized", "USB Device Not Recognized")
+                            .action("Reconnect the reciever", "Try disconnecting and reconnecting the reciever; Try different USB ports.")
+                            .action("The reciever may be fried", "This may happen if the sensors' charging cable was plugged into the USB port on the reciever and the terminals were shorted.")
+                        )
+                    )
+                )
+            )
             .generate(root);
     }
 }
