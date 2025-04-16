@@ -66,6 +66,7 @@ public class Main{
                         .pimaxError("30101", "SLAM Tracking Error", "Delete the SLAM folder", (page)->{
                             page.paragraph("This may appear briefly while the headset is connecting, which can be ignored.");
                             page.action("Delete the SLAM folder", "If this error persists, delete all contents of the SLAM folder, located at %programdata%\\pimax\\slam");
+                            page.source("Pimax", null);
                         })
                         .pimaxError("30202-30204", "Pimax Play and headset communication is malfunctioning", "Please wait. If the waiting time is too long, please restart the headset and the Pimax service.")
                         .pimaxError("30205", "Pimax Play has timed out while communicating with the headset", "Restart the computer or reinstall the Pimax Play client")

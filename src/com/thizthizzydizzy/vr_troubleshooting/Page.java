@@ -102,6 +102,7 @@ public class Page{
         return paragraph("For more troubleshooting support, see "+prefix+"<a href=\""+linkDestination+"\">"+linkText+"</a>", true);
     }
     public Page source(String linkText, String linkDestination){
+        if(linkDestination==null)return paragraph("Source: "+linkText);
         String prefix = "";
         if(linkText.toLowerCase(Locale.ROOT).startsWith("the ")){
             prefix += linkText.substring(0, 4);
