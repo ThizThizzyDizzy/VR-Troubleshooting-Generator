@@ -37,6 +37,8 @@ public class Page{
             +"        <title>"+title+"</title>\n"
             +"        <meta charset=\"UTF-8\">\n"
             +"        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+            +"        <meta property=\"og:title\" content=\"VR Troubleshooting\"/>\n"
+            +"        <meta property=\"og:description\" content=\""+title+" - "+links.size()+" link"+(links.size()==1?"":"s")+" - "+getLinkDescription()+"\"/>\n"
             +"        <link rel=\"stylesheet\" href=\""+ups+"blog/style.css\">\n"
             +"    </head>\n"
             +"    <body>\n"
@@ -153,11 +155,24 @@ public class Page{
         return pimaxError(error, cause, solution, null);
     }
     public Page pimaxError(String error, String cause, String solution, Consumer<Page> subpageStuff){
+        return pimaxError(error, cause, solution, subpageStuff, null, null);
+    }
+    public Page pimaxError(String error, String cause, String solution, Consumer<Page> subpageStuff, String source, String sourceLink){
         var subpage = new Page(error, "Pimax Error "+error)
             .paragraph(cause==null?"Unknown":cause);
         if(solution!=null)subpage.action("Solution", solution);
-        if(cause!=null&&solution!=null)subpage.source("Pimax", "https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517");
+        if(source!=null)subpage.source(source, sourceLink);
+        if(cause!=null&&solution!=null&&source==null)subpage.source("Pimax", "https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517");
         if(subpageStuff!=null)subpageStuff.accept(subpage);
         return problem(error, null, subpage);
+    }
+    public String getLinkDescription(){
+        int problems = countProblems();
+        int actions = countActions();
+        int resources = countResources();
+        boolean isInIssue = isInIssue();
+        String issuesStr = !isInIssue||problems>0?problems+" known issue"+(problems==1?"":"s")+", ":"";
+        String resourcesStr = resources>0?", "+resources+" external resource"+(resources==1?"":"s"):"";
+        return issuesStr+actions+" potential solution"+(actions==1?"":"s")+resourcesStr;
     }
 }

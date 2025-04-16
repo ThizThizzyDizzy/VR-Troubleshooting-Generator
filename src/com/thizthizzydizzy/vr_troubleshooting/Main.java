@@ -63,9 +63,9 @@ public class Main{
                         .pimaxError("20800", "The connection to the VR service failed", "Restart the Pimax service")
                         .pimaxError("29001", "There is an abnormality in the internal data communication of Pimax Play", "Restart the Pimax service")
                         .pimaxError("30000", "The Pimax Play service is experiencing an anomaly", "Restart the Pimax Play client, reinstall the PimaxPlay client")
-                        .pimaxError("30101", "Unknown", null, (page)->{
-                            page.paragraph("This may appear briefly while the headset is connecting.");
-                            page.action("Diagnose Connection Problems", "If this error persists, see <a href=\"../../crystal/connection/\">Connection Problems</a>");
+                        .pimaxError("30101", "SLAM Tracking Error", "Delete the SLAM folder", (page)->{
+                            page.paragraph("This may appear briefly while the headset is connecting, which can be ignored.");
+                            page.action("Delete the SLAM folder", "If this error persists, delete all contents of the SLAM folder, located at %programdata%\\pimax\\slam");
                         })
                         .pimaxError("30202-30204", "Pimax Play and headset communication is malfunctioning", "Please wait. If the waiting time is too long, please restart the headset and the Pimax service.")
                         .pimaxError("30205", "Pimax Play has timed out while communicating with the headset", "Restart the computer or reinstall the Pimax Play client")
@@ -116,6 +116,10 @@ public class Main{
                         )
                         .problem("The controllers won't reliably detect my hands touching the buttons", "(Flickering hand gestures in VRChat, etc.)", new Page("touch_sensors", "Pimax Crystal Controllers - Touch Sensors")
                             .paragraph("I am not aware of a solution to this; I would recommend switching to lighthouse tracking & knuckles (valve index controllers) if possible.")
+                        )
+                        .problem("The controllers are tracking offset to one side by a significant amount", "(Sometimes as little as a foot, sometimes over a meter)", new Page("offset_tracking", "Pimax Crystal Controllers - Offset Tracking")
+                            .action("Downgrade Pimax Play", "Try reinstalling an old version of pimax play.")
+                            .seeAlso("Pimax Play Version Archive", "https://www.thizthizzydizzy.com/blog/pimax_play_version_archive.html")
                         )
                     )
                     .problem("My controllers/vive trackers keep turning off", "(When using pimax play or any pimax headset))", new Page("standby", "Pimax - Standby Mode")
