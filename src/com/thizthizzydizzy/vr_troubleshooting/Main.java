@@ -119,6 +119,7 @@ public class Main{
                             .paragraph("I am not aware of a solution to this; I would recommend switching to lighthouse tracking & knuckles (valve index controllers) if possible.")
                         )
                         .problem("The controllers are tracking offset to one side by a significant amount", "(Sometimes as little as a foot, sometimes over a meter)", new Page("offset_tracking", "Pimax Crystal Controllers - Offset Tracking")
+                            .action("Delete the SLAM folder", "Delete all contents of the SLAM folder, located at %programdata%\\pimax\\slam")
                             .action("Downgrade Pimax Play", "Try reinstalling an old version of pimax play.")
                             .seeAlso("Pimax Play Version Archive", "https://www.thizthizzydizzy.com/blog/pimax_play_version_archive.html")
                         )
